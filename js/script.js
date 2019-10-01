@@ -14,10 +14,8 @@ Adapted from Treehouse FSJS Techdegree:
    will only be used inside of a function, then it can be locally 
    scoped to that function.
 ***/
-
-
-
-
+const list = document.getElementsByClassName("student-item cf");
+const studentnum = 10;
 /*** 
    Create the `showPage` function to hide all of the items in the 
    list except for the ten you want to show.
@@ -32,16 +30,41 @@ Adapted from Treehouse FSJS Techdegree:
        that will be passed into the parenthases later when you call or 
        "invoke" the function 
 ***/
-
-
+showPage(1);
+function showPage(pagenum){
+   //gets rid of students before page num
+   for(let i = 0; i < (pagenum-1) *studentnum; i++){
+      list[i].style.display = "none";
+   }
+   //displays students
+   for(let i = (pagenum-1) *studentnum; i < pagenum *studentnum; i++){
+      list[i].style.display = "block";
+   }
+   //gets rid of students after page num
+   for(let i = pagenum*studentnum; i < list.length; i++){
+      list[i].style.display = "none";
+   }
+}
 
 
 /*** 
    Create the `appendPageLinks function` to generate, append, and add 
    functionality to the pagination buttons.
 ***/
-
-
+appendPageLinks();
+function appendPageLinks(){
+   let divnew = document.createElement("div");
+   console.log(divnew);
+   for(let i = 1; i < list.length%studentnum + 3; i++){
+      let x = document.createElement("button");
+      divnew.appendChild(x);
+      x.textContent = i;
+      x.addEventListener("click", ()=>{
+         showPage(i);
+      });
+      document.getElementsByClassName("page")[0].appendChild(divnew);
+   }
+}
 
 
 
